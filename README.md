@@ -1,1 +1,1 @@
-Learning PHP7 and the framework symfony.
+Learning PHP 7 and Symfony 5.
