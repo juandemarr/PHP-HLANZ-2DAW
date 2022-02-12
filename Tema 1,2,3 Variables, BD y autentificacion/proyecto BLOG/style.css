@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+*{
+    box-sizing:border-box;
+    padding:0;
+    margin:0;
+}
+body{
+    background-color:#e7d28ec2;
+
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:1.1rem;
+}
+
+/*HEADER*/
+header{
+    padding: 1rem 10%;
+}
+#loginIcon{
+    width:3.5rem;
+}
+.userProfile{
+    position:absolute;
+    right:10%;
+    top: 1.5rem;
+}
+header a{
+    color:black;
+}
+header p{
+    margin:0;
+    text-align:right;
+}
+header p a{
+    text-decoration: underline;
+}
+
+/*MAIN*/
+#main{
+    width:80%;
+    margin:0 auto;
+}
+h1,h2,h3{
+    font-family: 'Ephesis', cursive;
+}
+h1{
+    font-size:3.5rem;
+    text-align:center;
+    /* text-shadow: 3px 4px 5px #9b6600; */
+}
+h2{
+    font-size:2.5rem;
+    text-align:center;
+    margin:0 0 2rem;
+}
+h3{
+    font-size:2.3rem;
+    margin:0 0 0.5rem 0;
+}
+#tituloComentarios{
+    font-size:1.2rem;
+    margin:2rem 0 0.75rem;
+}
+p{
+    margin:0 0 0.5rem;
+    line-height:25px;
+}
+a{
+    color:white;
+    text-decoration: none;
+}
+.negrita{
+    font-weight:bold;
+}
+.cursiva{
+    font-style: italic;
+}
+.libro{
+    display:flex;
+    padding:2rem;
+    background-color:#ede1be;
+    margin:0 0 3rem;
+    border:2px solid #b38c21;
+    border-radius:5px;
+    flex-wrap:wrap;
+}
+.imgLibro{
+    width:10rem;
+    height:15rem;
+}
+.datosLibro{
+    display:flex;
+    flex-direction:column;
+    margin:0 0 0 2rem;
+    width:60%;
+}
+.botonesLibro button{
+    margin:0.5rem 1rem 0 0;
+}
+
+/*COMENTARIOS*/
+.comentariosContenedor{
+    width:100%;
+    margin:1rem 0 0;
+}
+.comentariosContenedor form{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.comentariosContenedor form label{
+    margin:0;
+}
+textarea{
+    resize:none;
+    height:4rem;
+    width:66%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:1.1rem;
+    padding:0.4rem;
+    border:2px solid #b38c21;
+    border-radius:5px;
+    margin:0 1rem;
+}
+.comentariosContenedor form input[type="submit"]{
+    margin:0;
+}
+.mostrarComentarios{
+    background-color:white;
+    border:2px solid #b38c21;
+    padding:0.5rem 1rem;
+    border-radius:5px;
+}
+.mostrarUnComentario{
+    display:flex;
+    margin:0 0 0.75rem;
+}
+.mostrarUnComentario div{
+    width:20%;
+}
+.mostrarUnComentario div p{
+    margin:0 0 0.25rem;
+}
+.mostrarUnComentario .comentarioDeAutor{
+    width:70%;
+}
+.mostrarUnComentario .responderComentario{
+    display:flex;
+    align-items:flex-end;
+}
+.mostrarUnComentario .responderComentario a{
+    color:black;
+    text-decoration: underline;
+    font-size:1rem;
+}
+
+
+/*FORMULARIOS*/
+label{
+    margin:0 0 0.5rem;
+}
+input{
+    margin:0 0 1rem;
+    padding:0.4rem;
+    font-size:0.9rem;
+    border:2px solid #b38c21;
+    border-radius:5px;
+}
+input[type="submit"], button{
+    width:8rem;
+    color:white;
+    background-color:#b38c21;
+    border:2px solid #b38c21;
+    border-radius:5px;
+    padding:0.3rem;
+    margin:0;
+}
+input[type="submit"]:hover,button:hover{
+    transition:.4s ease-out;
+    background-color:white;
+    border:2px solid #b38c21;
+    color:#b38c21;
+}
+button a{
+    padding:0.5rem 2.5rem;
+}
+button a:hover{
+    color:#b38c21;
+}
+.formularioAnadir,.formularioEditar,.formularioLogin{
+    background-color:#ede1be;
+    padding:2rem;
+    width:55%;
+    margin:0 auto 3rem;
+    display:flex;
+    flex-direction:column;
+    border:2px solid #b38c21;
+    border-radius:5px;
+}
+
+/*LOGIN*/
+.formularioLogin{
+    align-items:center;
+    width:40%!important;
+}
+.formularioLogin input:not(input[type="submit"]){
+    width:80%;
+}
+
+
+/*FOOTER*/
+footer{
+    width:90%;
+    margin:0 auto;
+    padding:1rem 0 2rem;
+}
+
+/*MEDIAS QUERIES*/
+@media screen and (max-width:768px){
+    body{
+        font-size:0.9rem;
+    }
+    /*HEADER*/
+    header{
+        padding: 1rem 5% 0.5rem;
+    }
+    header p{
+        margin:0.25rem 0 0;
+    }
+    .userProfile{
+        right:5%;
+    }
+    h1{
+        font-size:2.7rem; 
+    }
+    #loginIcon{
+        width:3rem;
+    }
+
+    /*MAIN*/
+    #main{
+        width:90%;
+    }
+    h2{
+        font-size:2rem;
+        margin:0 0 1rem;
+    }
+    h3{
+        font-size:1.7rem;
+    }
+    p{
+        margin:0 0 0.25rem;
+        line-height:20px;
+    }
+    .libro{
+        padding:1rem;
+        margin:0 0 2rem;
+    }
+    .imgLibro{
+        width:7rem;
+        height:10rem;
+    }
+    .datosLibro{
+        margin:0 0 0 1rem;
+    }
+    
+    /*FORMULARIO*/
+    .formularioAnadir,.formularioEditar,.formularioLogin{
+        margin:0 auto 2rem;
+        width:65%;
+    }
+    input[type="submit"], button{
+        width:5rem;
+        font-size:0.8rem;
+        padding:0.2rem;
+    }
+    button a{
+        padding:0.3rem 0.8rem;
+    }
+    .botonesLibro button{
+        margin:0rem 1rem 0 0;
+    }
+    label{
+        margin:0 0 0.25rem;
+    }
+    input{
+        font-size:0.8rem;
+        margin:0 0 0.8rem;
+    }
+    textarea{
+        height: 3rem;
+        width: 70%;
+        font-size:0.9rem;
+    }
+    /*LOGIN*/
+    .formularioLogin{
+        width:55%!important;
+    }
+    .formularioLogin input[type="submit"]{
+        width:6rem;
+    }
+
+    /*FOOTER*/
+    footer{
+        width:90%;
+        padding:0rem 0 2rem;
+    }
+
+
+}
+@media screen and (max-width:576px){
+    body{
+        font-size:0.8rem;
+    }
+
+    /*HEADER*/
+    h1{
+        font-size:2rem;
+    }
+    #loginIcon{
+        width:2rem;
+    }
+
+    /*MAIN*/
+    h3{
+        font-size:1.25rem;
+    }
+    p{
+        margin:0 0 0.25rem;
+        line-height:16px;
+    }
+    .libro{
+        margin:0 0 1rem;
+    }
+    .imgLibro{
+        width:4rem;
+        height:6rem;
+    }
+    .datosLibro{
+        width:70%;
+    }
+
+    /*FORMULARIO*/
+    .formularioAnadir,.formularioEditar,.formularioLogin{
+        width:100%!important;
+        margin:0 auto 1rem;
+    }
+    input[type="submit"], button{
+        padding:0.1rem;
+    }
+    button a{
+        padding:0.25rem 1.2rem;
+    }
+    input{
+        font-size:0.8rem;
+    }
+    textarea{
+        font-size:0.8rem;
+    }
+    .formularioLogin input:not(input[type="submit"]){
+        width:90%;
+    }
+
+    /*FOOTER*/
+    footer{
+        padding:0.5rem 0 1.5rem;
+    }
+}
+

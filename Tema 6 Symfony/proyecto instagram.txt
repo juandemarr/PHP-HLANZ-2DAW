@@ -1,0 +1,49 @@
+﻿instagram
+gestion de usuarios, publicar fotos con comentarios, en el feed aparecen tus fotos, si sigues a personas, 
+apareceran sus ultimas 15 fotos por ejemplo. sistema de followers unidireccional,
+al pinchar en una foto se agrandara y aparecera con el comentario al lado, numero de me gustas y comentarios.
+Panel de administracion para gestionar denunciar comentarios, borrar posts, bannear cuenta.
+
+(¿Panel de admin de cada usuario sobre sus datos, editar email, fecha nac, nombreUsuario, nombreCompleto ?)
+Extra: buscador de profiles
+Puedes ver profiles sin estar logueado, pero al dar like o comentar redirige a /login
+
+BD:
+user (id, nombreUsuario, nombreCompleto, descripcion(opcional), fechaNac, email, password, comentarios, posts ) 
+    Relacion user - post de uno a muchos
+    Relacion user - comentarios de uno a muchos
+Post (idUser, foto, comentarios(opcional), autor(con user, de muchos a uno), likes(opcional, relacion con user de muchos a uno), )
+    Relacion post - comentarios uno a muchos
+    Relacion post - likes de uno a muchos
+los likes en post como atributo, relacion con usuarios de muchos a muchos
+Comentarios (idUser, idPost, texto, likes, comentariosHijos)
+    Relacion comentarios - comentarios de uno a muchos (como pokemon evolvedFrom)
+
+LIKES: un atributo de like un usuario y en post, no tabla, se crea en symfony invisible anosotros, no crearlo como entidad
+de muchos a muchos
+
+En el menu, edit profile, cerrar sesion
+/admin sera el administrador de instagram
+
+DISEÑO: boostrap, sass, titulo de instagram con letra cursiva elegante, color blanco
+Colores: morado suave intermedio con rosa, para header, letras de comentarios y del menu
+- MAIN view
+form con login, debajo enlace a register
+Una vez logueado redirige a /feed
+- FEED view
+mis posts, si sigo a personas, sus posts
+- PROFILE view:
+fot izq redonda, al lado nombre, numero de posts, numero de followers, numero de los que sigue, follow(o unfollow).
+Debajo los post uno a uno
+- POST view:
+    - foto
+    - likes, comentar
+    - lista comentarios con mismos "botones" debajo de like y comentar
+
+RELACIONES:
+atributo en posts relacion con usuarios => likes, de muchos a muchos
+relacion de usuarios a comentarios atrib en comentarios => user, de muchos a uno
+atributo en post, autor relacion con user, de muchos a uno
+Repost: 
+    idPost (ManyToOne with Post) -at en Post: reposts
+    idUser ( ManyToOne) -at en USer: reposts

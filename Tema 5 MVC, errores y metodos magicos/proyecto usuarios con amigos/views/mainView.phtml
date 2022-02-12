@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php 
+    echo '<p>Hola '.$_SESSION['user']->name.'</p>';
+    echo '<a href="index.php?login&logout">Logout</a>';
+    ?>
+    <h2>Probando los metodos magicos</h2>
+    <?php
+    //__set($propiedad,$valor) para valor
+    //$_SESSION['user']->hola = "hola";
+
+    //__set() para arrays
+    //$_SESSION['user']->hola = "hola";
+    //var_dump($_SESSION['user']->data);
+
+    //&__get($valor) Establece y obtiene el valor, get y set juntos
+    //$_SESSION['user']->adios="adios";
+    //var_dump($_SESSION['user']);
+
+    //toString() Usar un objeto como string, en lugar de dar error dara lo indicado dentro de esa funcion
+    //echo $_SESSION['user'];
+
+    //__isset($propiedad) Devuelve 1 (true) si existe la propiedad. Tbn se puede sobre propiedades protected y private
+    //var_dump(isset($_SESSION['user']->email));//devuelve 1 si existe (true)
+    
+    //__unset($propiedad)
+    //unset($_SESSION['user']->balon);
+    //var_dump($_SESSION['user']->balon);
+
+    //__sleep() y __wakeup()
+    //El metodo serialize() guarda una representacion de un objeto. Si lo guardamos en la bd, primero tendriamos
+    //que serializarlo, guardarlo, y depues si lo quisieramos de vuelta usar unserialize()
+    //serialize() comprueba si la clase tiene __sleep(). Si es así, se ejecuta antes de cualquier serialización. 
+    //Si tanto __serialize() y __sleep() están definidos en el mismo objeto, sólo se llamará a __serialize()
+    //si se hace serialize() y no existe __sleep se guarda un array con todas las propiedades del objeto
+    //echo serialize($_SESSION['user']);
+
+    //__wakeup() con unserialize()
+    //unserialize() comprueba si está __wakeup(). Permite reconstruir cualquier recurso del objeto.
+    //Destinado para restablecer las conexiones de bd que se puedan haber perdido durante la serialización y realizar otras tareas de reinicialización.
+    //unserialize() toma una única variable serializada y la vuelve a convertir a un valor de PHP.
+    //$string = serialize($_SESSION['user']);
+    //$o = unserialize($string);
+    
+
+    //__call($name,$arguments) se activa cuando se intenta llamar a un método que no es accesible públicamente
+    //__callStatic() para metodos estaticos
+    /*El parámetro $name corresponde al nombre del método al que se está llamando. 
+    El parámetro $arguments es un array enumerado que contiene los parámetros que se han pasado 
+    al método $name.*/
+    //implode() Une elementos de un array en un string
+    
+    //__invoke() permite usar un objeto como si fuera una funcion
+    //is_callable() verifica que lo pasado como argumento pueda ser llamado como una funcion
+    //echo $_SESSION['user']('hola');
+    //var_dump(is_callable($_SESSION['user']));
+    
+    //__clone()
+    //Usar el método __clone() para clonar también cualquier objeto inyectado cuando se use la clonación con clone
+    //$user = clone $_SESSION['user'];
+    //echo $user->rol;
+
+    ?>
+
+    <h2>List users</h2>
+    <?php
+    foreach($users as $user){
+        echo $user->name ."<br>";
+    }
+    
+    ?>
+    <h2>Friends</h2>
+    <?php
+    foreach($friends as $friend){
+        echo $friend->name." <a href='index.php?user&delete=".$friend->id."'>Delete friend</a><br>";
+    }
+    ?>
+
+    <h2>No friends</h2>
+    <?php
+    foreach($nofriends as $nofriend){
+        echo $nofriend->name." <a href='index.php?user&add=".$nofriend->id."'>Add friend</a><br>";
+    }
+    ?>
+    <footer>
+        <p>Autor: juandemarr&#169;</p>
+        <p>Probando los metodos magicos de PHP. Los usuarios pueden agregar como amigos a otros usuarios, y eliminarlos. Login y register.</p>
+    </footer>
+</body>
+</html>

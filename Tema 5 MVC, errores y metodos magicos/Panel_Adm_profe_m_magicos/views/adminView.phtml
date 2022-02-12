@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin View</title>
+</head>
+<body>
+    <a href="index.php?login&logout">Logout</a>
+    <h1>LISTA DE USUARIOS</h1>
+    <ul>
+    <?php
+    foreach($users as $user){
+        echo '<li>'.$user->name." - ".$user->email." - ";
+        if($user->rol==1)
+            echo '<a href="index.php?admin&goadmin='.$user->id.'">GO ADMIN</a>';//este admin para indicar de ir al controlador admin
+        else
+            echo '<a href="index.php?admin&desadmin='.$user->id.'">DES ADMIN</a>';
+
+        echo ' <a href="index.php?admin&edit='.$user->id.'">Editar</a>';
+        echo ' <a href="index.php?admin&del='.$user->id.'">Borrar</a>';
+        echo "</li>";
+    }
+    ?>
+    </ul>
+</body>
+</html>

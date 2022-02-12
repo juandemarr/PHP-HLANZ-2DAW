@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+    <title>examJuande</title>
+</head>
+
+<body>
+    <?php require_once("views/_header.php"); ?>
+    <section class="container-fluid container-md">
+        <form action="index.php?master&registerTeam" method="POST">
+            <div class="form-group">
+                <label for="name">Team name: </label>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <!-- <div class="form-group">
+                <label for="type">Type: </label>
+                <select name="type" id="type">
+                    <option value="electrico">Electricity</option>
+                    <option value="fuego">Fire</option>
+                    <option value="tierra">Earth</option>
+                    <option value="lucha">Fight</option>
+                    <option value="agua">Water</option>
+                </select>
+            </div> -->
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" class="btn btn-success" name="submitTeam" value="Register team">
+            </div>
+        </form>
+    </section>
+
+<script src="styles/bootstrap/js/libreriaJquery.js"></script>
+<script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Star Wars figures shop">
+    <link rel="icon" type="img/png" src="img/icon.svg">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <title>FigShop SW</title>
+</head>
+<body class="d-flex flex-column">
+    <?php require_once("views/_header.php"); ?>
+
+    <section class="container-fluid container-sm mt-3 mt-sm-4 mb-3 mb-sm-5 mx-auto d-flex flex-column" id="usersView">
+        <?php
+        foreach($users as $user){
+            echo '<div class="user d-flex justify-content-between align-items-center mb-2 p-2">';
+                echo '<p class="mb-0">'.$user->name.'</p>';
+                echo '<div>';
+                if($user->rol == 2){
+                    echo '<a href="index.php?admin-users&reset='.$user->id.'" class="btn btn-success">Reset password</a>';
+                }else if($user->rol == 1){
+                    echo '<a href="index.php?admin-users&reset='.$user->id.'" class="btn btn-success mr-2">Reset password</a>';
+                    echo '<a href="index.php?admin-users&delete='.$user->id.'" class="btn btn-danger">Deactivate user</a>';
+                }else{
+                    echo '<a href="index.php?admin-users&reset='.$user->id.'" class="btn btn-success mr-2">Reset password</a>';
+                    echo '<a href="index.php?admin-users&activate='.$user->id.'" class="btn btn-success">Activate user</a>';
+                }
+                echo '</div>';
+            echo '</div>';
+        }
+        ?>
+    </section>
+
+    <?php require_once("views/_footer.php"); ?>
+
+    <script src="styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

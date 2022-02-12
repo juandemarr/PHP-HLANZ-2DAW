@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainView</title>
+</head>
+<body>
+    <a href="index.php?login&logout">Logout</a><br><br>
+    <?php
+    echo 'Hola '.$_SESSION['user']->getName();
+    ?>
+    <h1>Usuarios de la bd</h1>
+    <ul>
+    <?php
+    foreach($users as $user){
+        echo '<li>'.$user->getName().'</li>';
+    }
+    ?>
+    </ul>
+
+    <h2>No amigos</h2>
+
+    <?php
+    foreach($_SESSION['user']->getNotFriends() as $friend){
+        echo $friend->getName();
+        echo " (".count($friend->getFriends())." amigos)";
+        echo " - <a href='index.php?user&addFriend=".$friend->getId()."'>Solicitar amistad</a><br>";
+    }
+    ?>
+    
+    <h2>Amigos</h2>
+
+    <?php
+    if($friends = $_SESSION['user']->getFriends())
+        foreach($friends as $friend){
+            echo $friend->getName();
+            echo " - <a href='index.php?user&delFriend=".$friend->getId()."'>Quitar amistad</a><br>";
+        }
+    else
+        echo "No tienes amigos aun";
+    ?>
+
+</body>
+</html>

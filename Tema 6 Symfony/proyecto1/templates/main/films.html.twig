@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <p><a href="/">Home</a></p>
+
+    <h2>Lista de peliculas</h2>
+
+    {% for movie in movies%}
+    {{movie.title}}<a href="/movies/hide/{{movie.id}}" >Ocultar</a><br><!-- equivalente a ?movie&hide=movie.id -->
+    {% endfor %}
+
+</div>
+{% endblock %}

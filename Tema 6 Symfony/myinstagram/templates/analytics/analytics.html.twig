@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Analíticas{% endblock %}
+
+{% block javascript %}
+{{parent()}}
+<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+{% endblock %}
+
+{% block body %}
+
+{{ include('_header.html.twig')}}
+
+<section id="analytics">
+    <p>Total de usuarios: {{totalUsers}}</p>
+    <p>Total de posts : {{totalPosts}}</p>
+
+    {#{{ dump(fivePostLikes) }} #}
+
+    <script type="text/javascript">
+        function graficoLikes(data){
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+            // Callback that creates and populates a data table, instantiates the chart, passes in the data and draws it.
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    
+                    ["Copper", 8.94, "#b87333"],
+                    ["Silver", 10.49, "silver"],
+                    ["Gold", 19.30, "gold"],
+                    ["Platinum", 21.45, "color: #e5e4e2"]
+            ]);
+            var options = {
+                title: "Density of Precious Metals, in g/cm^3",
+                width: 600,
+                height: 400,
+                bar: {groupWidth: "95%"},
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById("googleCharts"));
+            chart.draw(data, options);
+            }
+            
+        }
+    </script>
+
+    {% for post in fivePostLikes %}
+        {{ post.id }}
+    {% endfor %}
+
+    <div id="googleCharts"></div>
+
+</section>
+
+{{include('_footer.html.twig')}}
+
+{% endblock %}

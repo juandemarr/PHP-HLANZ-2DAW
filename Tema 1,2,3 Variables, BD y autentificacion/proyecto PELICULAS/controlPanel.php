@@ -1,0 +1,101 @@
+<?php
+session_start();
+
+//Connect to BD
+include "connectBD.php";
+
+//To add films
+if(isset($_POST['title']) && isset($_POST['year']) && isset($_POST['director']) && isset($_POST['actors']) && isset($_POST['poster'])){
+    if(mysqli_query($mysqli, "insert into films values (NULL, '".$_POST['title']."','".$_POST['year']."','".$_POST['director']."',
+    '".$_POST['actors']."','".$_POST['poster']."')"))
+        $addSuccess = true;
+    else
+        $addSuccess = false; 
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Films</title>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!--CUSTOM STYLES-->
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <!--SWEETALERT2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--CUSTOM SCRIPT-->
+    <script src="alert.js"></script>
+</head>
+<body class="bg-dark">
+    <?php
+        include "header.php";
+    ?>
+    <section class="container-md my-3 my-md-5">
+
+    <?php
+        if($_SESSION['rol'] == 2){ //admin
+    ?>
+    <div class="row">
+        <form class="col-md-6 offset-md-3 col-10 offset-1" action="controlPanel.php" method="POST">
+            <h2 class="text-center mb-3 mb-md-4">Add film</h2>
+            
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title" id="title" required autofocus/>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" class="form-control" name="year" id="year" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="director">Director:</label>
+                <input type="text" class="form-control" name="director" id="director" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="actors">Actors:</label>
+                <input type="text" class="form-control" name="actors" id="actors" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="poster">Img Path:</label>
+                <input type="text" class="form-control" name="poster" id="poster" required/>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="btn btn-success">Add film</button>
+            </div>
+
+            <?php
+                if(isset($addSuccess) && $addSuccess)
+                    echo '<script>addFilmYes()</script>';
+                if(isset($addSuccess) && !$addSuccess)
+                    echo '<script>addFilmNo()</script>';
+            ?>
+        </form>
+    </div>
+
+    <?php
+        }
+        if($_SESSION['rol'] == 1) //(user)
+        //extra in the future: add an user control panel
+    ?>
+
+    </section>
+    <?php
+        include "footer.php";
+    ?>
+    <!--BOOTSTRAP-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+</body>
+</html>

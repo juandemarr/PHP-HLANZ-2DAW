@@ -1,0 +1,236 @@
+-- symfony new --full myinstagram
+-- crear BD
+-- editar .env con los datos de la bd
+
+PARA AÑADIR BOOTSTRAP
+en public, meter carpeta de boostrap, scss y css
+
+PARA CONFIGURAR SASS
+crear dentro de public: sass con _base.scss (variables) y style.scss
+-- npm install -g sass => instala sass (NO HACE FALTA)
+-- npm init --yes => crea el package.json
+-- npm run watch => para compilar, escribirlo dentro de la carpeta public donde esta el package.json
+En package.json, en scripts
+"watch": "sass --watch styles/scss/style.scss styles/css/style.css"
+
+En templates, base añadir:
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" type="css/text" href="/boostrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="css/text" href="/css/style.css"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script src="/styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="/styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+HAY QUE AÑADIR EL META VIWEPORT PARA PODER HACER RESPONSIVE EN TIWG, base.html.tiwg
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+///////////////////////
+-- php bin/console make:user (entidad user)
+-- php bin/console make:auth (login)
+-- php bin/console make:registration-form (register)
+-- php bin/console make:migration
+-- php bin/console doctrine:migrations:migrate
+
+-- php bin/console make:controller (mainController)
+-- php bin/console make:entity nombreEntidad (entidad)
+-- php bin/console make:crud nombreEntidad (crud de la entidad)
+
+en la carpeta security
+Security, AuthAuthenticator -> onAuthenticationSucess, comentar la linea TODO
+descomentar return new y poner el nombre de la ruta (main)
+
+-- para comprobar si esta logueado
+en mainController:
+if($this->isGranted("ROLE_USER"))
+  $username=$this->getUser()->getUsername();
+Ó
+en la vista
+{% if is_granted('ROLE_USER') %}
+
+-- control del usuario
+en controlador: $this->getUser()
+en twig: app.user
+  ej: {% if app.user == usuario %}
+
+
+--- para acceder al usuario de la sesion y sus metodos de la entidad
+$posts = $this->getUser()->getTotalPosts();
+
+
+-- REDIRIGIR
+return $this->render
+ó
+return $this->redirectToRoute('homepage'); //si no hay ningun cambio ni datos creados
+
+-- PARA SUBIR IMAGENES FORM
+Copiar trozo en PostImage, PostController y en config, services.yaml:
+parameters:
+    images_directory: '%kernel.project_dir%/public/img'
+  
+Hay que añadir esto como parametro del function para usar el slugger 
+SluggerInterface $slugger
+
+y el use
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+
+--- Para guardar un campo automaticamente en un form sin añadirlo manualmente en la pag
+$post->setAutor($this->getUser());
+
+--- FECHA
+date('d-m-Y')
+-- en español
+setlocale(LC_TIME, 'es-ES'); SI NO FUNCIONA
+$meses = ["01"=>"Enero","02"=>"Febrero","03"=>"Marzo","04"=>"Abril","05"=>"Mayo","06"=>"Junio","07"=>"Julio","08"=>"Agosto","09"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Dicembre"];
+$mes = strftime('%m');
+$fecha = strftime("%d de $meses[$mes] de %G - %H horas");
+https://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=857:mostrar-fecha-en-espanol-php-setlocale-strftime-formato-datedefault-timezone-set-ejemplos-cu00831b&catid=70&Itemid=193
+
+
+--- Pasar variable por ruta
+EN LA VISTA TWIG con dos {{}}
+<a href="/users/admin/{{user.id}}">Make admin</a>
+
+EN EL CONTROLADOR con un {}
+/**
+ * @Route("/hide/{id}", name="hideMovie") ////Se nombra igual que el parametro a pasar en la funcion
+ */
+  public function hide($id): Response ////Para usar esa variable con $id hay que pasarla como parametro primero
+  {
+    $id
+  }
+
+
+--- Usar una entidad sin llamar al repositorio
+public function viewPokemon(Pokemon $p): Response //al indicarle la entidad a la que pertenece esa variable,
+    //symfony lo encuentra solo sin tener que buscarlo con la linea de abajo
+    //solo sirve cuando es uno a obtener
+    {
+        //$pokemon = $this->getDoctrine()->getManager()->getRepository("App:Pokemon")->findOneById($id);
+        
+        return $this->render('main/pokemon.html.twig', [
+            'controller_name' => 'MainController',
+            'p' => $p //se puede quitar, necesario para el enlace
+        ]);
+    }
+
+
+--- Si falla el doctrine
+si da error get->doctrine(), lo podemos pasar como argumento de la funcion en el controlador:
+public function show(ManagerDoctrine $doctrine, int $id)
+{
+  $product = $doctrine->getRepository(Product::class)->find($id)
+}
+
+
+--- Consultas al repositorio
+-- $pokemon = $this->getDoctrine()->getManager()->getRepository("App:Pokemon")->findAll();
+-- si da error get->doctrine(), lo podemos pasar como argumento de la funcion en el controlador:
+public function show(ManagerDoctrine $doctrine, int $id)
+{
+  $product = $doctrine->getRepository(Product::class)->find($id)
+}
+-- Ó me lo puedo traer como argumento y  no llamar a doctrine:
+public function index(PokemonRepository $pokemonRepository)
+en controlador: $pokemonRepository->findAll()
+
+
+--- Guardar en bd al acceder a un metodo para añadir datos de una entidad o insertar algo
+$em = $this->getDoctrine()->getManager();
+$em->persist($movie);
+$em->flush();
+
+--- Otra forma -> MEJOR
+use Doctrine\ORM\EntityManagerInterface;
+
+esto como parametro del metodo: EntityManagerInterface $entityManager
+
+$entityManager->persist($pokemon);
+$entityManager->flush();//guarda los cambios
+
+--- Para la longitud de un array:
+{{post.getLikes|length}}
+
+
+--- Para ver si un elemento está en el array
+  en twig: {% if post in usuario.getLikesPost%}
+  en controller o entity es contains: if (!$this->comments->contains($comment))
+  
+
+-- para enviar a una ruta que requiera de un parametro, se le pasa []
+return $this->redirectToRoute('user_show', ["nombreUsuario"=> $this->getUser()->getNombreUsuario()], Response::HTTP_SEE_OTHER);
+
+scheam update --force, se carga la bd y la crea de nuevo
+
+
+--- FORM MANUALES
+//para los form creados en html por post, en el main controller añadir Request $request en los aprametros de la funcion. 
+Esto recibe tanto get como post
+$txtBuscar = $request->get('txtBuscar'); este get coge solo los post
+$request->query->get('txtBuscar') para coger los get
+
+Añadir:
+use Symfony\Component\HttpFoundation\Request;
+
+
+--- /////////////////////
+-- si la entidad no tiene __toString, se puede pasar en twig con usuario.nombreUsuario, xq hay que pasarle un string
+y en el controlador se recoge como /edit/{user}, pero tendre que hacer metodo en repositorio de findUserByName, a no ser
+si se pone como argumento el mismo nombre que cualquier atributo de la entidad, symfony tbn lo asocia
+
+
+--- Borrar un usuario haciendo logout antes:
+$this->get('security.token_storage')->setToken(null);
+$entityManager->remove($user);
+$entityManager->flush();
+$session->invalidate(0);
+
+pasarle como argumento a la funcion delete(SessionInterface $session)
+
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+--- JOIN
+public function feed($value)
+    {
+        //como indico que esos user esten en followed (array de relacion en user)
+        return $this->createQueryBuilder('p')
+            ->join('p.autor' , 'u')
+            //se coge el campo que hace de union entre ambas tablas, y este u es el alias que se le pone a la tabla 
+            //que se va a relacionar
+            ->join('u.followed' , 'f')
+            //ahora este usuario tiene que estar en la otra tabla followed
+            ->andWhere('f.id = :val')
+            //ese followed debo ser yo, para ver sus post, por lo que el id es el de mi usuario
+            ->setParameter('val', $value->getId())
+            //es mejor pasar el objeto user entero y aqui coger su id
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
+Para que no me cambie la foto del header, se usa app.user.footPerfil, no le paso la variable de usuario
+
+
+Si un cmapo es required true, para que se puedan guardar nulos añadir en la creacion del form:
+'data_class' => null,
+
+Para ver el contenido de una variable del controlador, con dump($var) y luego exit; lo muestra en la vista,, sin
+tener que mandarselo al render
+
+sensio/framework-extra-bundle installed,
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+para usar el @IsGranted("ROLE_ADMIN") en el comentario de un metodo en el controlador, debajo del @route
+
+//Ej de instagram:
+Añadir analiticas:
+total de usuarios registrados, total de post publicados, top 5 post con mas likes, con mas comentarios.
+Numero de post del ultimo dia, del ultimo mes
+meterlo con google chart

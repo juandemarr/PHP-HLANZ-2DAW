@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Star Wars figures shop">
+    <link rel="icon" type="img/png" src="img/icon.svg">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <title>FigShop SW</title>
+</head>
+<body class="d-flex flex-column">
+    <?php require_once("views/_header.php"); ?>
+
+    <section class="container-fluid container-md mt-3 mt-sm-4 mb-3 mb-sm-5 mx-auto d-flex flex-column" id="adminView">
+        <form class="col-12 col-md-8 col-lg-6 p-4 mx-auto mb-3" action="" method="POST">
+            <div class="form-group">
+                <label for="name">Product name: </label>
+                <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Product description: </label>
+                <input type="text" class="form-control" name="description" id="description" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image name: </label>
+                <input type="text" class="form-control" name="image" id="image" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price: </label>
+                <input type="text" class="form-control" name="price" id="price" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity: </label>
+                <input type="text" class="form-control" name="quantity" id="quantity" required>
+            </div>
+            <div class="form-group d-flex justify-content-center mt-4 mb-0">
+                <input type="submit" class="btn btn-black" name="addProduct" value="Add product">
+            </div>
+        </form>
+
+        <div class="d-flex flex-wrap ml-sm-4 ml-md-5">
+            <?php
+            foreach ($products as $product) {
+                echo '<div class="product p-2 d-flex flex-column">';
+                    echo '<div class="data">';
+                        echo '<img class="mb-2" src="img/'.$product->img.'" alt="'.$product->name.'">';
+                        echo '<p class="font-weight-bold mb-0 mb-sm-2">'.$product->name.'</p>';
+                        echo '<p class="mb-0 mb-sm-1">'.$product->description.'</p>';
+                        echo '<p class="mb-0 mb-sm-1">Price: '.$product->price.'$</p>';
+                        echo '<p class="mb-0 mb-sm-1">Quantity: '.$product->quantity.'</p>';
+                    echo '</div>';
+                    echo '<div class="buttons d-flex justify-content-end mt-1">';
+                        echo '<a href="index.php?admin-products&edit='.$product->id.'" class="btn btn-success mr-1">Edit</a>';
+                        echo '<a href="index.php?admin-products&delete='.$product->id.'" class="btn btn-danger">Delete</a>';
+                    echo '</div>';
+                echo '</div>';
+                }
+            ?>
+
+        </div>
+    </section>
+
+    <?php require_once("views/_footer.php"); ?>
+
+    <script src="styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

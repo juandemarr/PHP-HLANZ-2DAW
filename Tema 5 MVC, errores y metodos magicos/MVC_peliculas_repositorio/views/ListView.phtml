@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mi lista de peliculas</title>
+	<style>
+		h1{
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Mi lista de peliculas</h1>
+
+	<a href="index.php">Inicio</a>
+
+	<?php
+		if(!$_SESSION['user']->getRol())
+			echo '<a href="index.php?login">Login</a>';
+		else echo 'Hola '.$_SESSION['user']->getName().'
+				<a href="index.php?login&logout">Salir</a>';//login porque ahí se le dice que controlador va a usar (dentro del mainController)
+	?>
+
+	<br><br>
+
+	<form action="index.php" method="POST">
+		<input type="text" name="busca" placeholder="Titulo para la búsqueda">
+		<input type="submit" value="Busca">
+	</form>
+	
+	<form action="index.php" method="POST">
+		<input type="radio" name="ordenar" id="asc" value="ASC"/>
+		<label for="asc">Ordenar de forma ascendente</label>
+		<br>
+		<input type="radio" name="ordenar" id="desc" value="DESC"/>
+		<label for="desc">Ordenar de forma descendente</label>
+		<br><br>
+		<input type="submit" value="Ordenar"/>
+		<br><br>
+	</form>
+
+	<ul>
+		<?php
+
+		foreach ($movies as $movie) {
+			echo '<li><a href="index.php?info='.$movie->getId().'">'.$movie->getTitle().'</a> 
+			(Estrenado en <a href="index.php?year='.$movie->getYear().'">'.$movie->getYear().'</a>)</li>';
+			echo $movie->getLikes().' Likes ';
+			//<a href="index.php?like='.$movie->getId().'">Like</a> 1 forma, con otro metodo de dislike en el segundo enlace
+			echo '<a href="index.php?like=1&id='.$movie->getId().'">Like</a>
+			<a href="index.php?like=-1&id='.$movie->getId().'">Dislike</a>';
+			//like=+1 ese mas no lo coje el sql, se pone en la consulta y aqui se deja a 1
+		}
+
+		?>
+	</ul>
+	<!--cuando le das a like carga el index y se reordenan-->
+	<footer>
+		<p>Autor: juandemarr&#169;</p>
+		<p>Muestra peliculas y enlace a titulo que muestra su detalle<br>
+		añade like o dislike a pelicula<br>
+		buscar pelicula por titulo<br>
+		peliculas ordenadas por año<br>
+		enlace al año y cuando se pulse muestre solo las de ese año<br>
+		Login y registro de usuarios</p>
+	</footer>
+</body>
+</html>

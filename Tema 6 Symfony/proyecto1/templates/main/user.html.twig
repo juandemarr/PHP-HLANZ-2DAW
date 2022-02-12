@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {% for user in users %}
+    
+        {% set bool = false %}
+        {{user.username}}
+
+        {% for rol in user.roles %}
+            {% if rol == "" %}
+            {% elseif rol == "ROLE_ADMIN" %}
+                {% set bool = true %}
+                {{rol}}
+            {% endif%}
+        {% endfor %}
+
+        {% if bool %}
+        <a href="/users/no-admin/{{user.id}}">Make no admin</a><br>
+        {% else %}
+        <a href="/users/admin/{{user.id}}">Make admin</a><br>
+        {% endif %}
+
+    {% endfor %}
+</div>
+{% endblock %}

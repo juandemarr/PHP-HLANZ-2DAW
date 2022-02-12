@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+    <title>examJuande</title>
+</head>
+
+<body>
+    <?php require_once("views/_header.php"); ?>
+    <section>
+        <?php
+        echo '<p><a href="index.php?master&registerPokemon">Register Pokemon</a></p>';
+        echo '<p><a href="index.php?master&registerTeam">Register Team</a></p>'
+        ?>
+       
+        <h2>LIST OF MY POKEMON</h2>
+        <?php
+        foreach($listPokedex as $pokemon){
+            echo '<div>';
+            echo '<p>Name: '.$pokemon->namePokemon.'</p>';
+            echo '</div>';
+        }
+        ?>
+        <h2>LIST OF OTHERS POKEMON</h2>
+        <?php
+        foreach($listOtherPokemon as $pokemon){
+            echo '<div>';
+            echo '<img src="img/'.$pokemon->img.'" alt="'.$pokemon->name.'"/>';
+            echo '<p>Name: '.$pokemon->name.' - Type: '.$pokemon->type.'</p>';
+            echo '</div>';
+        }
+        ?>
+
+    </section>
+
+    <script src="styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

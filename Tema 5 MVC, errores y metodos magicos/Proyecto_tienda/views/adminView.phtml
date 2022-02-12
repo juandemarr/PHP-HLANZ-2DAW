@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Star Wars figures shop">
+    <link rel="icon" type="img/png" src="img/icon.svg">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <title>FigShop SW</title>
+</head>
+<body class="d-flex flex-column">
+    <?php require_once("views/_header.php"); ?>
+
+    <section class="container-fluid container-md mt-3 mt-sm-4 mb-3 mb-sm-5 mx-auto d-flex align-items-center justify-content-center" id="adminView">
+        <a class="a-grey" href="index.php?admin-products">
+            <div class="admin-div mr-4">
+                Administrate products
+            </div>
+        </a>
+        <a class="a-grey" href="index.php?admin-users">
+            <div class="admin-div">
+                Administrate users
+            </div>
+        </a>
+    </section>
+
+    <?php require_once("views/_footer.php"); ?>
+
+    <script src="styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    background-color:rgb(246, 246, 246);
+    margin:0;
+}
+#main{
+    width:70%;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+}
+header{
+    background-color:rgb(216, 216, 216);
+    padding:1rem;
+    margin-bottom:2rem;
+}
+header a{
+    color:rgb(116, 116, 116);
+    text-decoration:none;
+    margin-right:0.75rem;
+    font-weight:bold;
+}
+header a:hover{
+    color:black;
+    transition:.5s ease-out;
+}
+h2{
+    text-align:center;
+}
+
+/*FORMS*/
+input{
+    border:1px solid rgb(216, 216, 216);
+    border-radius:5px;
+    padding:0.25rem;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin-bottom:0.25rem;
+}
+input[type="submit"]{
+    border-radius:5px;
+    border:1px solid rgb(216, 216, 216);
+    background-color:rgb(216, 216, 216);
+    width:5rem;
+    height:1.75rem;
+    color:rgb(116, 116, 116);
+    font-weight:bold;
+}
+input[type="submit"]:hover{
+    transition:.2s ease-out;
+    background-color:rgb(246, 246, 246);
+}
+
+/*SECTIONS*/
+.registerView,.loginView{
+    display:flex;
+    justify-content:center;
+    width:40%;
+    border:2px solid rgb(216, 216, 216);
+    border-radius:10px;
+    margin-top:4rem;
+    padding:2rem;
+}
+.registerView input[type="submit"],.loginView input[type="submit"]{
+    margin:0 auto;
+}
+.adminView{
+    width:100%;
+}
+.adminView .user{
+    border:2px solid rgb(216, 216, 216);;
+    border-radius:10px;
+    padding:1rem;
+    margin-bottom:1rem;
+}
+.adminView .user form{
+    display:flex;
+    justify-content:space-between;
+    flex-direction:row;
+}
+.adminView .user input[type="submit"]{
+    align-self:center;
+}
+.adminView .form-group{
+    margin-bottom:0.25rem;
+}
+
+/*MEDIA QUERIES*/
+@media screen and (max-width:576px){
+    #main{
+        width:90%;
+    }
+    .registerView{
+        width:100%;
+    }
+}
+@media screen and (max-width:765px){
+    .registerView{
+        width:60%;
+    }
+}

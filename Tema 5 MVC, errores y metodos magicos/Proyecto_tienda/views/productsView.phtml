@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Star Wars figures shop">
+    <link rel="icon" type="img/png" src="img/icon.svg">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/style.css"/>
+    <title>FigShop SW</title>
+</head>
+<body class="d-flex flex-column">
+    <?php require_once("views/_header.php"); ?>
+
+    <section class="container-fluid container-md mt-3 mt-sm-4 mb-3 mb-sm-5 mx-auto row" id="productsView">
+        <div class="d-flex flex-wrap ml-sm-4 ml-md-5">
+            <?php
+            foreach ($products as $product) {
+                echo '<div class="product p-2 d-flex flex-column">';
+                    echo '<div class="data">';
+                        echo '<img class="mb-2" src="img/'.$product->img.'" alt="'.$product->name.'">';
+                        echo '<p class="font-weight-bold mb-0 mb-sm-2">'.$product->name.'</p>';
+                        echo '<p class="mb-0 mb-sm-1">'.$product->description.'</p>';
+                        echo '<p class="mb-0 mb-sm-1">Price: '.$product->price.'$</p>';
+                    echo '</div>';
+                    echo '<div class="buttons d-flex justify-content-end mt-1">';
+                        echo '<a href="index.php?cart&add='.$product->id.'" class="btn btn-black">Add to cart</a>';
+                    echo '</div>';
+                echo '</div>';
+                }
+            ?>
+        </div>
+    </section>
+
+    <?php require_once("views/_footer.php"); ?>
+    
+    <script src="styles/bootstrap/js/libreriaJquery.js"></script>
+    <script src="styles/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
