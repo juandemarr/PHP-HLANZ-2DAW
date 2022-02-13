@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-02-2022 a las 23:16:08
+-- Tiempo de generación: 13-02-2022 a las 21:49:01
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -48,7 +48,6 @@ INSERT INTO `comment` (`id`, `post_id`, `user_id`, `descripcion`, `time`) VALUES
 (20, 5, 5, '\"Watch those wrist rockets!\"', '2022-02-06 13:00:00'),
 (21, 5, 5, '\"Lord Vader will not be pleased, fight harder!\"', '2022-02-10 12:40:00'),
 (22, 9, 5, '\"My life for yours\"', '2022-02-08 14:08:00'),
-(23, 6, 5, 'So sad to see how they ends :\'(', '2022-02-10 20:49:00'),
 (24, 6, 5, 'The last time she saws the light in him', '2022-02-01 09:59:00'),
 (25, 8, 5, 'The begining of a legend', '2022-02-02 10:50:00'),
 (26, 3, 1, 'The queen of music', '2022-02-09 13:17:00'),
@@ -106,14 +105,14 @@ CREATE TABLE `post` (
 
 INSERT INTO `post` (`id`, `autor_id`, `foto`, `descripcion`, `time`) VALUES
 (2, 1, 'anakin-padme-61edc0a1722c0.jpg', 'Mi primer post!', '2022-02-08 00:00:00'),
-(3, 1, '1-61edc3dfdfbcd.jpg', NULL, '2022-02-09 17:41:00'),
+(3, 1, '1-61edc3dfdfbcd.jpg', 'G.E.M.', '2022-02-09 17:41:00'),
 (4, 1, 'IMG-0002-61edc4195316e.jpg', 'Lightning, de Final fantasy XIII', '2022-02-10 18:00:00'),
 (5, 5, 'BattlefrontII-2020-01-11-15-01-00-701-61f6bd101184c.png', 'Una joya de juego', '2022-02-08 19:00:00'),
-(6, 1, 'IMG-9771-61f6bd36d1678.jpg', NULL, '2022-02-08 19:00:00'),
-(7, 1, '1024-61fc24028d3f6.jpg', NULL, '2022-02-01 07:00:00'),
+(6, 1, 'IMG-9771-61f6bd36d1678.jpg', 'No words need for the end of the clone wars', '2022-02-08 19:00:00'),
+(7, 1, '1024-61fc24028d3f6.jpg', 'The fall of a hero for her love', '2022-02-01 07:00:00'),
 (8, 1, 'vader-and-starkiller-620518308224c.png', 'The force unleashed 1 <3', '2022-02-08 15:54:00'),
 (9, 1, 'vfull-6205188d48b4d.jpg', 'Visas Marr, the queen', '2022-02-08 20:00:00'),
-(10, 1, 'Anakin-And-Padme-62051a048fe4d.jpg', NULL, '2022-02-07 18:59:00'),
+(10, 1, 'Anakin-And-Padme-62051a048fe4d.jpg', '\"No, I promise you\"', '2022-02-07 18:59:00'),
 (11, 5, 'IMG-0202-62051ab36cf1a.jpg', 'A tragic end. Kuiil teach us that a true warrior is by heart and carry the moral in blood', '2022-02-09 18:55:00'),
 (12, 5, 'swtor-2019-03-10-13-58-25-847-62051af9a5838.png', 'The rise of a legend turn in mith', '2022-02-08 20:00:00'),
 (13, 5, 'swkotor2-2016-10-22-04-02-42-869-62051b6b83d4b.png', 'You have to play it ;)', '2022-02-08 13:27:00');
@@ -139,6 +138,7 @@ INSERT INTO `post_user` (`post_id`, `user_id`) VALUES
 (3, 5),
 (5, 1),
 (5, 5),
+(6, 1),
 (6, 5),
 (8, 5),
 (9, 5),
