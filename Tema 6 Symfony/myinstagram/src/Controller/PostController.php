@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+use Symfony\Component\Filesystem\Filesystem;
+
 /**
  * @Route("/post")
  */
@@ -99,8 +101,8 @@ class PostController extends AbstractController
             //$meses = ["01"=>"Enero","02"=>"Febrero","03"=>"Marzo","04"=>"Abril","05"=>"Mayo","06"=>"Junio","07"=>"Julio","08"=>"Agosto","09"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12"=>"Dicembre"];
             //$mes = strftime('%m');
             //$fecha = strftime("%d de $meses[$mes] de %G - %H horas");
-            $fecha = new DateTime();
-            $post->setDateTime($fecha);
+            $fecha = new \DateTime();
+            $post->setTime($fecha);
             
             $entityManager->persist($post);
             $entityManager->flush();
@@ -174,9 +176,18 @@ class PostController extends AbstractController
     /**
      * @Route("/delete/{id}", name="post_delete", methods={"POST"})
      */
-    public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Post $post, PostRepository $repo, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $img = $repo->findImgById($post->getId())->getFoto();
+            $fs = new Filesystem(); //Para borrar el archivo fisico 
+
+            try{
+                $fs->remove($this->getParameter('images_directory').'/'.$img);
+            }catch(FileException $e){
+
+            }
+
             $entityManager->remove($post);
             $entityManager->flush();
         }

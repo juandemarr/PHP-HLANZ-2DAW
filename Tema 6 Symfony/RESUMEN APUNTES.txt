@@ -229,8 +229,17 @@ sensio/framework-extra-bundle installed,
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 para usar el @IsGranted("ROLE_ADMIN") en el comentario de un metodo en el controlador, debajo del @route
 
-//Ej de instagram:
-Añadir analiticas:
-total de usuarios registrados, total de post publicados, top 5 post con mas likes, con mas comentarios.
-Numero de post del ultimo dia, del ultimo mes
-meterlo con google chart
+$fecha = new \DateTime()
+
+
+--- PARA BORRAR UN ARCHIVO FISICO como la img de un post guardado en local
+use Symfony\Component\Filesystem\Filesystem;
+
+$img = $repo->findImgById($post->getId())->getFoto();
+  $fs = new Filesystem(); //Para borrar el archivo fisico 
+
+  try{
+    $fs->remove($this->getParameter('images_directory').'/'.$img);
+  }catch(FileException $e){
+
+}

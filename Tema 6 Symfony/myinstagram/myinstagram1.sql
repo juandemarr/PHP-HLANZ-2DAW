@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-02-2022 a las 21:49:01
+-- Tiempo de generación: 14-02-2022 a las 00:46:48
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -106,7 +106,6 @@ CREATE TABLE `post` (
 INSERT INTO `post` (`id`, `autor_id`, `foto`, `descripcion`, `time`) VALUES
 (2, 1, 'anakin-padme-61edc0a1722c0.jpg', 'Mi primer post!', '2022-02-08 00:00:00'),
 (3, 1, '1-61edc3dfdfbcd.jpg', 'G.E.M.', '2022-02-09 17:41:00'),
-(4, 1, 'IMG-0002-61edc4195316e.jpg', 'Lightning, de Final fantasy XIII', '2022-02-10 18:00:00'),
 (5, 5, 'BattlefrontII-2020-01-11-15-01-00-701-61f6bd101184c.png', 'Una joya de juego', '2022-02-08 19:00:00'),
 (6, 1, 'IMG-9771-61f6bd36d1678.jpg', 'No words need for the end of the clone wars', '2022-02-08 19:00:00'),
 (7, 1, '1024-61fc24028d3f6.jpg', 'The fall of a hero for her love', '2022-02-01 07:00:00'),
@@ -115,7 +114,8 @@ INSERT INTO `post` (`id`, `autor_id`, `foto`, `descripcion`, `time`) VALUES
 (10, 1, 'Anakin-And-Padme-62051a048fe4d.jpg', '\"No, I promise you\"', '2022-02-07 18:59:00'),
 (11, 5, 'IMG-0202-62051ab36cf1a.jpg', 'A tragic end. Kuiil teach us that a true warrior is by heart and carry the moral in blood', '2022-02-09 18:55:00'),
 (12, 5, 'swtor-2019-03-10-13-58-25-847-62051af9a5838.png', 'The rise of a legend turn in mith', '2022-02-08 20:00:00'),
-(13, 5, 'swkotor2-2016-10-22-04-02-42-869-62051b6b83d4b.png', 'You have to play it ;)', '2022-02-08 13:27:00');
+(13, 5, 'swkotor2-2016-10-22-04-02-42-869-62051b6b83d4b.png', 'You have to play it ;)', '2022-02-08 13:27:00'),
+(15, 1, 'IMG-0002-62099810a1071.jpg', 'Lightning', '2022-02-14 00:45:20');
 
 -- --------------------------------------------------------
 
@@ -286,7 +286,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT de la tabla `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `report`

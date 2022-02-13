@@ -552,3 +552,18 @@ Para que no me cambie la foto del header, se usa app.user.footPerfil, no le paso
 
 Para ver el contenido de una variable del controlador, con dump($var) y luego exit; lo muestra en la vista,, sin
 tener que mandarselo al render
+
+$fecha = new \DateTime()
+
+
+--- PARA BORRAR UN ARCHIVO FISICO como la img de un post guardado en local
+use Symfony\Component\Filesystem\Filesystem;
+
+$img = $repo->findImgById($post->getId())->getFoto();
+  $fs = new Filesystem(); //Para borrar el archivo fisico 
+
+  try{
+    $fs->remove($this->getParameter('images_directory').'/'.$img);
+  }catch(FileException $e){
+
+}
