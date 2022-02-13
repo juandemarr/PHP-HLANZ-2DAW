@@ -1,4 +1,8 @@
 #analytics{
     @include mainSection;
     flex-direction:column;
+
+    #googleCharts{
+        margin:1rem 0 0;
+    }
 }
