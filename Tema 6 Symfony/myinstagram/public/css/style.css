@@ -95,7 +95,7 @@ p {
 body {
   background-color: #e7e7e7;
   font-size: 0.7rem;
-  min-height: 100vh;
+  min-height: 120vh;
   display: flex;
   flex-direction: column;
 }
@@ -387,10 +387,23 @@ footer {
   padding: 1rem;
   margin: 1.5rem 0 0;
 }
+footer p {
+  margin: 0 0 0.5rem;
+  line-height: 18px;
+}
+@media (min-width: 768px) {
+  footer p {
+    line-height: 26px;
+  }
+}
+footer a {
+  color: #800080;
+  text-decoration: underline;
+}
 @media (min-width: 768px) {
   footer {
     margin: 3rem 0 0;
-    padding: 1rem 9rem;
+    padding: 1.5rem 9rem;
   }
 }
 
@@ -773,12 +786,21 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0.75rem 0 0;
+  margin: 0.5rem 0 0;
+}
+#analytics #googleCharts div {
+  margin: 0 0 0.5rem;
+}
+@media (min-width: 768px) {
+  #analytics #googleCharts div {
+    margin: 0 0.75rem 0 0;
+  }
 }
 @media (min-width: 768px) {
   #analytics #googleCharts {
     flex-direction: row;
     align-items: unset;
+    margin: 0.75rem 0 1.4rem;
   }
 }
 

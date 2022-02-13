@@ -91,7 +91,7 @@ class PostRepository extends ServiceEntityRepository
     }
 
     public function fiveNumberPostLikes()
-    {//tienen que salir: kuiil (3), gem(2), battlefront2 (2), clone wars(2), visas(2)
+    {
         return $this->createQueryBuilder('p')
             ->select('count(p)')
             ->join('p.likes' , 'u')
@@ -103,14 +103,36 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
-    public function fivePostComments()
-    {//tienen que salir: 
+    public function fiveIdPostComments()
+    {//tienen que salir: kotor2(2), battlefront2(2), anakin-padme(2), gem(2), visas(3)
         return $this->createQueryBuilder('p')
             ->select('p')
-            ->join('p.likes' , 'u')
+            ->join('p.comments' , 'c')
+            ->groupBy('p.id')
+            ->orderBy('count(p)', 'DESC')
+            ->setMaxResults(5) //de poner 6 el siguiente tiene 1 comentario
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function fiveNumberPostComments(){
+        return $this->createQueryBuilder('p')
+            ->select('count(p)')
+            ->join('p.comments' , 'c')
             ->groupBy('p.id')
             ->orderBy('count(p)', 'DESC')
             ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function postsUltimaSemana($val){
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->andWhere('p.time > :val')
+            ->setParameter('val', $val)
             ->getQuery()
             ->getResult()
         ;

@@ -23,16 +23,19 @@ class AnalyticsController extends AbstractController
         $totalUsers = count($userRepo->findAll());
         $totalPosts = count($postRepo->findAll());
 
+        //LIKES
+
         //Obtener id de los 5 posts con mas likes
+
         $arrayIdPostLikes = array();
         $fiveIdPostLikes = $postRepo->fiveIdPostLikes();
         foreach ($fiveIdPostLikes as $key => $value) {
-            $arrayIdPostLikes[] = $value->getId();
-            
+            $arrayIdPostLikes[] = $value->getId();    
         }
         //dump($arrayIdPostLikes);
         
         //Obtener numero de likes de los 5 posts
+
         $arrayNumberPostLikes = array();
         $fiveNumberPostLikes = $postRepo->fiveNumberPostLikes();
         foreach ($fiveNumberPostLikes as $key => $value) {
@@ -43,15 +46,47 @@ class AnalyticsController extends AbstractController
         //dump(json_encode($arrayNumberPostLikes));
         //exit;
         
+        //COMENTARIOS
         
-        
-        //$fivePostComments = $postRepo->fivePostComments();
-        
+        //Obtener id de los 5 posts con mas comentarios
+
+        $arrayIdPostComments = array();
+        $fiveIdPostComments = $postRepo->fiveIdPostComments();
+        foreach ($fiveIdPostComments as $key => $value) {
+            $arrayIdPostComments[] = $value->getId();
+            
+        }
+        //dump($arrayIdPostComments);
+
+        //Obtener numero de comentarios de los 5 posts
+
+        $arrayNumberPostComments = array();
+        $fiveNumberPostComments = $postRepo->fiveNumberPostComments();
+        foreach ($fiveNumberPostComments as $key => $value) {
+            foreach ($value as $key2 => $value2) {
+                $arrayNumberPostComments[] = $value2;
+            }
+        }
+
+        //dump($arrayNumberPostComments);
+        //exit;
+
+
+        //Post creados la ultima semana (ya que todos son del ultim mes)
+        $ultimaSemana = new \DateTime();
+        $ultimaSemana->modify("-1 week"); //para obtener la semana anterior
+
+        $postsUltimaSemana = $postRepo->postsUltimaSemana($ultimaSemana);
+
         return $this->render('analytics/analytics.html.twig', [
             'totalUsers' => $totalUsers,
             'totalPosts' => $totalPosts,
             'idPostLikes' => $arrayIdPostLikes,
-            'numberPostLikes' => $arrayNumberPostLikes
+            'numberPostLikes' => $arrayNumberPostLikes,
+            'idPostComments' => $arrayIdPostComments,
+            'numberPostComments' => $arrayNumberPostComments,
+            'postsUltimaSemana' => $postsUltimaSemana
         ]);
     }
+
 }

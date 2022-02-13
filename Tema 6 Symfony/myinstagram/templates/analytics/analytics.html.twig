@@ -14,9 +14,13 @@
 {{ include('_header.html.twig')}}
 
 <section id="analytics">
-    <p>Total de usuarios: {{totalUsers}}</p>
-    <p>Total de posts : {{totalPosts}}</p>
+    <h5>Total de usuarios</h5>
+    <p>{{totalUsers}}</p>
 
+    <h5>Total de posts</h5>
+    <p>{{totalPosts}}</p>
+
+    <h5>Gráficos</h5>
     {# idPostLikes y numberPostLikes #}
     <script type="text/javascript">
         
@@ -33,7 +37,7 @@
         function drawChart() {
 
         //Hay que crear los arrays dentro de la funcion
-        const idPostLikes = {{idPostLikes | json_encode}}; //transforma el array PHP a uno js
+        const idPostLikes = {{idPostLikes | json_encode}}; //transforma el array PHP a uno js. Esta notacion se pinta como error pero está bien
         const numberPostLikes = {{numberPostLikes | json_encode}}
 
         // Create the data table.
@@ -56,12 +60,12 @@
             vAxis: {
                 title: 'Numero de likes',
                 minValue: 0,
-                format:0
+                format:0 //quita los decimales
             },
             hAxis: {
                 title: 'ID Post',
                 minValue: 0,
-                
+                format:0
             },
             width:350,
             height:350,
@@ -70,7 +74,10 @@
                 startup:true,
                 easing:'out'
             },
-            colors:['orangered']
+            colors:['orangered'],
+            bar: {
+                groupWidth: '60%'
+            }
         };
 
         // Instantiate and draw our chart, passing in some options.
@@ -79,11 +86,71 @@
         }
     </script>
 
-<div id="googleCharts">
-    <div id="likeChart"></div>
-    <div id="commentChart"></div>
-</div>
-    
+    {# idPostComments y numberPostComments #}
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+
+        const idPostComments = {{idPostComments | json_encode}};
+        const numberPostComments = {{numberPostComments | json_encode}}
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'ID Post');
+        data.addColumn('number', 'comments');
+
+        for(let id in idPostComments){
+            for(let number in numberPostComments)
+                if(id == number)
+                    data.addRows([
+                        [parseInt(idPostComments[id]),numberPostComments[number]]
+                    ])
+        }
+        
+
+        // Set chart options
+        var options = {
+            title:'Top 5 posts con más comentarios',
+            vAxis: {
+                title: 'Numero de comentarios',
+                minValue: 0,
+                format:0
+            },
+            hAxis: {
+                title: 'ID Post',
+                minValue: 0,
+                format:0,
+            },
+            width:350,
+            height:350,
+            animation:{
+                duration:2000,
+                startup:true,
+                easing:'out'
+            },
+            colors:['orangered'],
+            bar: {
+                groupWidth: '40%'
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('commentChart'));
+        chart.draw(data, options);
+        }
+    </script>
+
+
+    <div id="googleCharts">
+        <div id="likeChart"></div>
+        <div id="commentChart"></div>
+    </div>
+
+    <h5>Posts de la ultima semana</h5>
+    {# postsUltimaSemana #}
+    {% for post in postsUltimaSemana %}
+        <p>{{post.id}} => {{post.descripcion}}</p>
+    {% endfor %}
 
 </section>
 
