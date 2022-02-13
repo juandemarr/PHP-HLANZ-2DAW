@@ -40,8 +40,8 @@ class AnalyticsController extends AbstractController
                 $arrayNumberPostLikes[] = $value2;
             }
         }
-        dump(json_encode($arrayNumberPostLikes));
-        exit;
+        //dump(json_encode($arrayNumberPostLikes));
+        //exit;
         
         
         
@@ -50,8 +50,8 @@ class AnalyticsController extends AbstractController
         return $this->render('analytics/analytics.html.twig', [
             'totalUsers' => $totalUsers,
             'totalPosts' => $totalPosts,
-            'fivePostLikes' => $fivePostLikes,
-            //'fivePostComments' => $fivePostComments
+            'idPostLikes' => $arrayIdPostLikes,
+            'numberPostLikes' => $arrayNumberPostLikes
         ]);
     }
 }
