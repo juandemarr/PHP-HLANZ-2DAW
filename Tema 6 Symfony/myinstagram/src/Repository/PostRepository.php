@@ -77,11 +77,24 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
-    public function fivePostLikes()
+    public function fiveIdPostLikes()
     {//tienen que salir: kuiil (3), gem(2), battlefront2 (2), clone wars(2), visas(2)
         return $this->createQueryBuilder('p')
-            ->select('p') //count(p) devuelve un array de arrays con el numero de likes, de querer el objeto post seria sin count
+            ->select('p') //desde aqui no puedo acceder al numero de likes, hacer otra consulta con count(p)
             ->join('p.likes' , 'u') //aqui es donde se une con el atributo-relacion likes, ManyToMany, entre post y user
+            ->groupBy('p.id')
+            ->orderBy('count(p)', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function fiveNumberPostLikes()
+    {//tienen que salir: kuiil (3), gem(2), battlefront2 (2), clone wars(2), visas(2)
+        return $this->createQueryBuilder('p')
+            ->select('count(p)')
+            ->join('p.likes' , 'u')
             ->groupBy('p.id')
             ->orderBy('count(p)', 'DESC')
             ->setMaxResults(5)

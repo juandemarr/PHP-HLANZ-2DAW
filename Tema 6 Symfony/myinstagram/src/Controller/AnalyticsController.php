@@ -22,15 +22,36 @@ class AnalyticsController extends AbstractController
     {
         $totalUsers = count($userRepo->findAll());
         $totalPosts = count($postRepo->findAll());
+
+        //Obtener id de los 5 posts con mas likes
+        $arrayIdPostLikes = array();
+        $fiveIdPostLikes = $postRepo->fiveIdPostLikes();
+        foreach ($fiveIdPostLikes as $key => $value) {
+            $arrayIdPostLikes[] = $value->getId();
+            
+        }
+        //dump($arrayIdPostLikes);
         
-        $fivePostLikes = $postRepo->fivePostLikes();
-        $fivePostComments = $postRepo->fivePostComments();
+        //Obtener numero de likes de los 5 posts
+        $arrayNumberPostLikes = array();
+        $fiveNumberPostLikes = $postRepo->fiveNumberPostLikes();
+        foreach ($fiveNumberPostLikes as $key => $value) {
+            foreach ($value as $key2 => $value2) {
+                $arrayNumberPostLikes[] = $value2;
+            }
+        }
+        dump(json_encode($arrayNumberPostLikes));
+        exit;
+        
+        
+        
+        //$fivePostComments = $postRepo->fivePostComments();
         
         return $this->render('analytics/analytics.html.twig', [
             'totalUsers' => $totalUsers,
             'totalPosts' => $totalPosts,
             'fivePostLikes' => $fivePostLikes,
-            'fivePostComments' => $fivePostComments
+            //'fivePostComments' => $fivePostComments
         ]);
     }
 }
