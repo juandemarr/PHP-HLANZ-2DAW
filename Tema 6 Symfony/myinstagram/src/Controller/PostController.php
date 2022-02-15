@@ -130,7 +130,7 @@ class PostController extends AbstractController
 
             $comment->setPost($post);
             $comment->setUser($this->getUSer());
-            $comment->setDateTime(new DateTime());
+            $comment->setTime(new \DateTime());
 
             $entityManager->persist($comment);
             $entityManager->flush();
