@@ -567,3 +567,6 @@ $img = $repo->findImgById($post->getId())->getFoto();
   }catch(FileException $e){
 
 }
+
+
+//al clonar un proyecto de github, para instalar el resto de carpetas con composer install
