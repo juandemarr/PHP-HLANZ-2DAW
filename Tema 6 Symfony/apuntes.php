@@ -570,3 +570,8 @@ $img = $repo->findImgById($post->getId())->getFoto();
 
 
 //al clonar un proyecto de github, para instalar el resto de carpetas con composer install
+
+//el import de css lo quitamos de app.js
+Esto estara en base.html.twig
+lo lincamos en el div creado en la vista twig que necesitemos (main index)
+yarn add react-router-dom
