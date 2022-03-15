@@ -1,0 +1,4 @@
+<script src="styles/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="styles/sweetalert/alerts.js"></script>
+
+esto en head

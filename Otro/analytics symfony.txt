@@ -1,0 +1,2 @@
+para analitycs ver pixel, desde google analytics, se mete en la web de symfony
+hay bundles para meter el carrito, TPV en symfony 
