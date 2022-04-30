@@ -1,3 +1,6 @@
 https://www.ticarte.com/contenido/symfony-5-tutorial-para-desarrollar-tu-primera-aplicacion-web
 
 https://symfony.com/doc/current/security.html
+
+Leer archivo epub con file api: https://www.youtube.com/watch?v=mLEevhxbaKE
+Libreria js para renderizar documentos epub: http://futurepress.org/
