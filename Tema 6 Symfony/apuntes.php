@@ -516,7 +516,7 @@ cordova: pack de html, css y jquery
 y asi se mantiene
 
 
---- Borrar un usuario haciendo logout antes:
+--- Borrar un usuario haciendo logout antes (symfony 5)
 $this->get('security.token_storage')->setToken(null);
 $entityManager->remove($user);
 $entityManager->flush();
@@ -525,6 +525,21 @@ $session->invalidate(0);
 pasarle como argumento a la funcion delete(SessionInterface $session)
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+
+--- PARA ELIMINAR EL USUARIO ACTUAL (symfony 6)
+añadi rcom oparametro de la funcion SessionInterface $session y su use:
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+comprobar si el usuario actual tiene el mismo id que el a elimnar, para invalidar la sesion actual
+$currentUserId = $this->getUser()->getId();
+if ($currentUserId == $id){           
+  $this->get('security.token_storage')->setToken(null);
+  $userRepository->remove($user);
+  $session->invalidate();//for exiting the actual session
+}else{
+  $userRepository->remove($user);
+}
+
 
 
 --- JOIN
@@ -575,3 +590,16 @@ $img = $repo->findImgById($post->getId())->getFoto();
 Esto estara en base.html.twig
 lo lincamos en el div creado en la vista twig que necesitemos (main index)
 yarn add react-router-dom
+
+
+///////////////
+Para hacer que aparezca la vista de detalle de la entidad en easyadmin añadir:
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+y en la function 
+public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->disable('new')
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ;
+    }

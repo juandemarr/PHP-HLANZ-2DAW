@@ -168,6 +168,20 @@ return $this->redirectToRoute('user_show', ["nombreUsuario"=> $this->getUser()->
 scheam update --force, se carga la bd y la crea de nuevo
 
 
+--- PARA ELIMINAR EL USUARIO ACTUAL (symfony 6)
+añadi rcom oparametro de la funcion SessionInterface $session y su use:
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+comprobar si el usuario actual tiene el mismo id que el a elimnar, para invalidar la sesion actual
+$currentUserId = $this->getUser()->getId();
+if ($currentUserId == $id){           
+  $this->get('security.token_storage')->setToken(null);
+  $userRepository->remove($user);
+  $session->invalidate();//for exiting the actual session
+}else{
+  $userRepository->remove($user);
+}
+
+
 --- FORM MANUALES
 //para los form creados en html por post, en el main controller añadir Request $request en los aprametros de la funcion. 
 Esto recibe tanto get como post
@@ -184,7 +198,7 @@ y en el controlador se recoge como /edit/{user}, pero tendre que hacer metodo en
 si se pone como argumento el mismo nombre que cualquier atributo de la entidad, symfony tbn lo asocia
 
 
---- Borrar un usuario haciendo logout antes:
+--- Borrar un usuario haciendo logout antes (symfony 5):
 $this->get('security.token_storage')->setToken(null);
 $entityManager->remove($user);
 $entityManager->flush();
