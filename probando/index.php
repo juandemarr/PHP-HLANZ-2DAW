@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="API_crud.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
 <form id="loginform" method="post">
@@ -13,6 +14,9 @@
         <input type="submit" name="loginBtn" id="loginBtn" value="Login" />
     </div>
 </form>
+
+<div id="container"></div>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $('#loginform').submit(function(e) {
@@ -23,6 +27,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response)
             {
+                //console.log(response);
                 var jsonData = JSON.parse(response);
                 // user is logged in successfully in the back-end
                 // let's redirect
@@ -46,6 +51,8 @@ $(document).ready(function() {
 <!-- 
 serialize() convierte los datos de los input del form, o checks seleccionados, en un string 
 ya que lo que recibe y envia el servidor siempre es string
+
+Los datos enviados con serialize se obtienen llamando de forma normal a $_POST["username"] o $_GET
 
 ---PARA CONVERTIR A JSON
     JSON.parse() convierte el string en un objeto JSON
