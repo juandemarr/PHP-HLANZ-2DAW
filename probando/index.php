@@ -15,6 +15,8 @@
     </div>
 </form>
 
+<button id="test">Objeto en data de AJAX</button>
+
 <div id="container"></div>
 
 <script type="text/javascript">
@@ -43,6 +45,21 @@ $(document).ready(function() {
            }
        });
      });
+
+     $("#test").on("click", function(e){
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "login.php",
+            data: {
+                name:'hello',
+                lastname:'there',
+            },
+            success: function(response){
+                console.log(response);
+            }
+        })
+     })
 });
 </script>
 </body>
